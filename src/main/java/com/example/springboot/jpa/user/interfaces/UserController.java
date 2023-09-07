@@ -5,29 +5,29 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserFacade userFacade;
 
-    @PostMapping("/create")
+    @PostMapping
     public String createUser(@RequestBody UserDto dto) {
         userFacade.createUser(dto);
         return "success";
     }
 
-    @GetMapping("/read")
+    @GetMapping
     public UserDto getUser(@RequestParam Long userId) {
         return userFacade.getUser(userId);
     }
 
-    @PostMapping("/update")
+    @PutMapping
     public UserDto updateUser(@RequestBody UserDto dto) {
         return userFacade.updateUser(dto);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping
     public String deleteUser(@RequestParam Long userId) {
         userFacade.deleteUser(userId);
         return "success";
