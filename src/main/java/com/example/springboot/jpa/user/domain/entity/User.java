@@ -1,4 +1,4 @@
-package com.example.springboot.jpa.user.entity;
+package com.example.springboot.jpa.user.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
