@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
 
-    @Transactional
     @Override
+    @Transactional
     public void createUser(UserDto dto) {
         // user 엔티티 생성
         User toSave = User.builder()
@@ -28,7 +29,6 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    @Transactional(readOnly = true)
     public UserDto getUser(Long userId) {
         // 없으면 예외발생
         User user = userRepository.findById(userId)

@@ -10,6 +10,6 @@ spring:
     defer-datasource-initialization: true # 스키마 기반으로 DB 생성
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boro?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3308/boro?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 1234
