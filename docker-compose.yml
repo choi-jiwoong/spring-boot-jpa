@@ -1,17 +1,32 @@
 version: '3'
 services:
-  mysql:
+  studymysql: # 해당 이름으로 찾아간다.
     image: mysql:latest
-    container_name: mysql
+    container_name: studymysql
     restart: always
     ports:
-      - 3306:3306
+      - 3308:3306
     environment:
       MYSQL_DATABASE: boro
       MYSQL_ROOT_PASSWORD: 1234
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql # 여기에 db가 쌓인다.
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # 도커의 init-db
 
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - 6379:6379
+
+
+  springbootjpa:
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - studymysql
+      - redis
 
 volumes:
   mysql_data:

@@ -10,6 +10,7 @@ spring:
     defer-datasource-initialization: true # 스키마 기반으로 DB 생성
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/boro?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+#    url: jdbc:mysql://localhost:3306/boro?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true 기존 설정값
+    url: jdbc:mysql://studymysql:3306/boro # 내가 만든 도커 Mysql 이름에 연결해야한다.
     username: root
     password: 1234
