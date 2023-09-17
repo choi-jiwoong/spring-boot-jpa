@@ -1,6 +1,6 @@
 package com.example.springboot.jpa.user.facade;
 
-import com.example.springboot.jpa.user.domain.service.UserService;
+import com.example.springboot.jpa.user.domain.userService.UserService;
 import com.example.springboot.jpa.user.interfaces.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
