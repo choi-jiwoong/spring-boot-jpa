@@ -1,4 +1,4 @@
-package com.example.springboot.jpa.user.domain.service;
+package com.example.springboot.jpa.user.domain.userService;
 
 import com.example.springboot.jpa.user.domain.entity.User;
 import com.example.springboot.jpa.user.infrastructure.UserRepository;
