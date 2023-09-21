@@ -1,6 +1,6 @@
 version: '3'
 services:
-  localmysql: # 해당 이름으로 찾아간다.
+  mysql_server: # 해당 이름으로 찾아간다.
     image: mysql:latest
     container_name: localmysql
     restart: always
@@ -13,20 +13,26 @@ services:
       - mysql_data:/var/lib/mysql # 여기에 db가 쌓인다.
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql # 도커의 init-db
 
-  redis:
+  redis_server:
     container_name: redis
     image: redis
     ports:
       - 6379:6379
 
-
   springbootjpa:
     build: .
     ports:
-      - 8080:8080
+      - 8081:8080
     depends_on:
-      - localmysql
-      - redis
+      - mysql_server
+      - redis_server
+    environment:
+      DATABASE_URL: mysql_server
+      DATABASE_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1234
+      REDIS_URL : redis_server
+      REDIS_PORT: 6379
 
 volumes:
   mysql_data:

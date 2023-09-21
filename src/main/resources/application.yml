@@ -10,12 +10,12 @@ spring:
     defer-datasource-initialization: true # 스키마 기반으로 DB 생성
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3308/boro?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-#    url: jdbc:mysql://spring-boot-jpa/localmysql:3308/boro # 내가 만든 도커 Mysql 이름에 연결해야한다.
-    username: root
-    password: 1234
+#    url: jdbc:mysql://localhost:3308/boro?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${DATABASE_URL}:${DATABASE_PORT}/boro # 내가 만든 도커 Mysql 이름에 연결해야한다.
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
   data:
     redis:
-      host: localhost
-      port: 6379
+      host: ${REDIS_URL}
+      port: ${REDIS_PORT}
 

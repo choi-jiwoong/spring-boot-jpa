@@ -18,7 +18,7 @@ public class RedisController {
      * 캐시 확인
      */
     @GetMapping()
-    @Cacheable(value = "user") // 캐시에 저장된 이후로는 빨리 반환된다.
+    @Cacheable(value = "user") // 캐시에 저장된 이후로는 빨리 반환된다. -> key값도 필요할수도..
     public String get(@RequestParam(value = "id") String id) {
         log.info("get user - userId:{}", id);
         try {

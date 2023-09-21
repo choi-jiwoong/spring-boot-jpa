@@ -46,7 +46,7 @@ public class RedisConfig {
         return new MessageListenerAdapter(new RedisSubService());
     }
 
-    //컨테이너 설정
+    //컨테이너 설정 - 좀 더 보기
     @Bean
     RedisMessageListenerContainer redisContainer() {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
@@ -57,7 +57,7 @@ public class RedisConfig {
 
     //pub/sub 토픽 설정
     @Bean
-    ChannelTopic topic() {
+    ChannelTopic topic() { // 여러 채널, consumer가 여러개일때 어떻게 받는지?
         return new ChannelTopic("topic1");
     }
 }

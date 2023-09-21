@@ -15,7 +15,7 @@ public class RedisSubService implements MessageListener {
     @Override
     public void onMessage(Message message, byte[] pattern) {
         // 메세지를 받고 나서의 로직
-        log.error("message subscribe");
-        System.out.println("받은 메시지 = " + message.toString());
+        log.info("message subscribe");
+        log.info("받은 메시지 = " + message.toString());
     }
 }
