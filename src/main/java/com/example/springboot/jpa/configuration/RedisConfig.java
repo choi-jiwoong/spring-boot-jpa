@@ -1,6 +1,9 @@
 package com.example.springboot.jpa.configuration;
 
 import com.example.springboot.jpa.user.domain.redisService.RedisSubService;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +25,7 @@ public class RedisConfig {
 
     @Value("${spring.data.redis.host}")
     private String redisHost;
+
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
@@ -59,5 +63,18 @@ public class RedisConfig {
     @Bean
     ChannelTopic topic() { // 여러 채널, consumer가 여러개일때 어떻게 받는지?
         return new ChannelTopic("topic1");
+    }
+
+
+    // redisson 연결
+    @Bean
+    public RedissonClient redissonClient() {
+        Config redisConfig = new Config();
+        redisConfig.useSingleServer()
+                .setAddress("redis://localhost:6379/"); // database에 연결된 주소 직접 넣음
+//                .setAddress("rediss://" + redisHost + ":" + redisPort) -> localhost/127.0.0.1:6379 (Unable to connect to Redis server)
+//                .setConnectionPoolSize(5)
+//                .setConnectionMinimumIdleSize(5);
+        return Redisson.create(redisConfig);
     }
 }

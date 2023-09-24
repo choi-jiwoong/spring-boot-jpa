@@ -12,4 +12,6 @@ public interface UserService {
 
     void deleteUser(Long userId);
 
+    void deleteUserWithRedis(Long userId);
+
 }
