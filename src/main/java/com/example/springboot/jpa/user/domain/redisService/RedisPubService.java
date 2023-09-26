@@ -12,6 +12,7 @@ public class RedisPubService {
 
     private final RedisTemplate<String, String> redisTemplate;
     public String sendMessage(String message) {
+        log.info("publish");
         redisTemplate.convertAndSend("topic1", message);
         return "success"; // 수신여부 모름
     }
