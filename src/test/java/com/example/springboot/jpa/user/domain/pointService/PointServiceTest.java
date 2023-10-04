@@ -19,7 +19,7 @@ class PointServiceTest {
     @Rollback(false)
     public void insertPoints() {
         for (int i = 0; i < 30; i++) {
-            pointService.insertPoint(1L, 100L, 50, i); // 3000원이 쌓인다.
+            pointService.insertPoint(1L, 100L, 50, i, "method1"); // 3000원이 쌓인다.
         }
     }
 
@@ -27,7 +27,7 @@ class PointServiceTest {
     @Rollback(false)
     public void insertPoints2() {
         for (int i = 0; i < 30; i++) {
-            pointService.insertPoint(1L, 100L, 10, i); // 3000원이 쌓인다.
+            pointService.insertPoint(1L, 100L, 10, i,  "method2"); // 3000원이 쌓인다.
         }
     }
 

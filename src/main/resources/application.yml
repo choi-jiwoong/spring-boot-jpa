@@ -8,11 +8,11 @@ spring:
   jpa:
     database: mysql
     hibernate:
-      ddl-auto: create # schema로 만드려면 create로 설정해야한다.
+      ddl-auto: update # schema로 만드려면 create로 설정해야한다.
     defer-datasource-initialization: true # 스키마 기반으로 DB 생성
     properties:
       hibernate:
-        show_sql: true
+#        show_sql: true
         format_sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

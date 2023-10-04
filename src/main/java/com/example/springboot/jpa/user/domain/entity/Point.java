@@ -15,7 +15,7 @@ public class Point {
 
     private Long value;
 
-    @Setter
+    @Setter // 안쓰는 걸 권장 -> 메소드로 빼기(setSequence)
     private Integer sequence;
 
     private LocalDateTime regDt;
@@ -25,5 +25,6 @@ public class Point {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
+
 
 }

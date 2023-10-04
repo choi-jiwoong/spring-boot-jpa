@@ -1,5 +1,6 @@
 package com.example.springboot.jpa.user.domain.pointService;
 
+import com.example.springboot.jpa.configuration.annotation.RedisLock;
 import com.example.springboot.jpa.user.domain.entity.Point;
 import com.example.springboot.jpa.user.domain.entity.User;
 import com.example.springboot.jpa.user.infrastructure.PointRepository;
@@ -31,8 +32,8 @@ public class PointService {
      * 포인트 쌓기
      */
     @Transactional
-//    @RedisLock(key = "point")
-    public Point insertPoint(Long userId, Long value, long sleep, int i) {
+    @RedisLock(key = "point")
+    public Point insertPoint(Long userId, Long value, long sleep, int i, String message) {
 
         try {
             Thread.sleep(sleep);
@@ -50,7 +51,7 @@ public class PointService {
                 .build();
 
         Point save = pointRepository.save(toSave);
-        log.info("===========입금 = {}, {}", save.getUser().getId(), save.getSequence());
+        log.info("===========입금 = {}, {}, {} ", message, save.getUser().getId(), save.getSequence());
         return save;
     }
 
