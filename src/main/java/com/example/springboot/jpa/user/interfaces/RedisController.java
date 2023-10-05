@@ -1,4 +1,4 @@
-package com.example.springboot.jpa.tools.controller;
+package com.example.springboot.jpa.user.interfaces;
 
 import com.example.springboot.jpa.user.domain.redisService.RedisPubService;
 import lombok.RequiredArgsConstructor;

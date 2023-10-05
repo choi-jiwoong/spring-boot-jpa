@@ -4,12 +4,14 @@ import com.example.springboot.jpa.user.domain.entity.User;
 import com.example.springboot.jpa.user.infrastructure.UserRepository;
 import com.example.springboot.jpa.user.interfaces.UserDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
@@ -52,4 +54,5 @@ public class UserServiceImpl implements UserService{
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
     }
+
 }

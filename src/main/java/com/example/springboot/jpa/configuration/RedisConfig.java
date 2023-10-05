@@ -1,7 +1,11 @@
 package com.example.springboot.jpa.configuration;
 
 import com.example.springboot.jpa.user.domain.redisService.RedisSubService;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -14,19 +18,15 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
+@RequiredArgsConstructor
 public class RedisConfig {
 
-
-    @Value("${spring.data.redis.port}")
-    private String redisPort;
-
-    @Value("${spring.data.redis.host}")
-    private String redisHost;
+    private final RedisProperties redisProperties;
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
-        redisStandaloneConfiguration.setHostName(redisHost);
-        redisStandaloneConfiguration.setPort(Integer.parseInt(redisPort));
+        redisStandaloneConfiguration.setHostName(redisProperties.getHost());
+        redisStandaloneConfiguration.setPort(redisProperties.getPort());
         LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration);
         return lettuceConnectionFactory;
     }
@@ -59,5 +59,17 @@ public class RedisConfig {
     @Bean
     ChannelTopic topic() { // 여러 채널, consumer가 여러개일때 어떻게 받는지?
         return new ChannelTopic("topic1");
+    }
+
+
+    // redisson 연결
+    @Bean
+    public RedissonClient redissonClient() {
+        Config redisConfig = new Config();
+        redisConfig.useSingleServer()
+                .setAddress("redis://" + redisProperties.getHost() + ":" + redisProperties.getPort())
+                .setConnectionPoolSize(5)
+                .setConnectionMinimumIdleSize(5);
+        return Redisson.create(redisConfig);
     }
 }

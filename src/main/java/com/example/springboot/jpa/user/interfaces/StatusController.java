@@ -1,4 +1,4 @@
-package com.example.springboot.jpa.tools.controller;
+package com.example.springboot.jpa.user.interfaces;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

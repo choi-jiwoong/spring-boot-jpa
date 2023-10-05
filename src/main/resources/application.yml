@@ -1,21 +1,32 @@
+
+
 spring:
+
   sql:
     init:
       mode: always
   jpa:
     database: mysql
     hibernate:
-      show_sql: true
-      ddl-auto: create # schema로 만드려면 create로 설정해야한다.
+      ddl-auto: update # schema로 만드려면 create로 설정해야한다.
     defer-datasource-initialization: true # 스키마 기반으로 DB 생성
+    properties:
+      hibernate:
+#        show_sql: true
+        format_sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3308/boro?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-    url: jdbc:mysql://${DATABASE_URL}:${DATABASE_PORT}/boro # 내가 만든 도커 Mysql 이름에 연결해야한다.
-    username: ${MYSQL_USER}
-    password: ${MYSQL_PASSWORD}
+    url: jdbc:mysql://localhost:3308/boro?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+#    url: jdbc:mysql://${DATABASE_URL}:${DATABASE_PORT}/boro # 내가 만든 도커 Mysql 이름에 연결해야한다.
+    username: root
+    password: 1234
   data:
     redis:
-      host: ${REDIS_URL}
-      port: ${REDIS_PORT}
+      host: localhost
+      port: 6379
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    io.lettuce: DEBUG
 

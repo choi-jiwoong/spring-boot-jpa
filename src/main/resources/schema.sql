@@ -1,4 +1,15 @@
+DROP TABLE IF EXISTS point;
 DROP TABLE IF EXISTS user;
+
+create table point (
+                       id bigint auto_increment,
+                       sequence integer,
+                       reg_dt datetime(6),
+                       upd_dt datetime(6),
+                       user_id bigint,
+                       value bigint,
+                       primary key (id)
+);
 
 create table user
 (

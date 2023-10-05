@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity @Getter @Builder @AllArgsConstructor
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @Table(name = "user")
@@ -21,6 +23,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "user")
+    private List<Point> points;
+
+
     public enum Role {
         USER, ADMIN
     }
@@ -33,4 +39,5 @@ public class User {
     public void updateRole(Role role) {
         this.role = role;
     }
+
 }
